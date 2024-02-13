@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const addRuleBtn = document.getElementById('addRuleBtn');
-    const ruleInput = document.getElementById('passwordInput');
-    const ruleList = document.getElementById('ruleList');
+  const ruleList = document.getElementById('ruleList');
+  const passwordInput = document.getElementById('passwordInput');
+  const charCount = document.getElementById('charCount');
+
+  //Update char count
+  passwordInput.addEventListener('input', function() {
+    charCount.textContent = passwordInput.value.length;
+  });
 
 
     /* Create an array of active and inactive rules. Rule one starts active by default, and inactive rules are added to
@@ -38,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ruleItem.textContent = rule.text;
 
       //Set background color based on rule satisfaction
-      ruleItem.style.backgroundColor = rule.satisfied ? '#baffc9' : '#ffb3ba';
+      ruleItem.style.backgroundColor = rule.satisfied ? '#a3e4b7' : '#f2a7a7';
   
       // Insert the new rule at the top of the list
       ruleList.insertBefore(ruleItem, ruleList.firstChild);
@@ -69,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const ruleItems = document.getElementsByClassName('rule-item');
       for (let i = 0; i < ruleItems.length; i++) {
         if (ruleItems[i].textContent === rule.text) {
-          ruleItems[i].style.backgroundColor = rule.satisfied ? '	#baffc9' : '#ffb3ba';
+          ruleItems[i].style.backgroundColor = rule.satisfied ? '#a3e4b7' : '#f2a7a7';
           break;
         }
       }
