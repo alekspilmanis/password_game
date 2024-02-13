@@ -1,9 +1,9 @@
-.hint-list {
+.rule-list {
     list-style-type: none;
     padding: 0;
   }
   
-  .hint-item {
+  .rule-item {
     background-color: #f0f0f0;
     padding: 10px;
     margin-bottom: 5px;
