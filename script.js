@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const ruleItem = document.createElement('li');
       ruleItem.classList.add('rule-item');
       ruleItem.textContent = rule.text;
+
+      //Set background color based on rule satisfaction
+      ruleItem.style.backgroundColor = rule.satisfied ? '#baffc9' : '#ffb3ba';
   
       // Insert the new rule at the top of the list
       ruleList.insertBefore(ruleItem, ruleList.firstChild);
@@ -51,10 +54,28 @@ document.addEventListener('DOMContentLoaded', function() {
     //Functions to satisfy and unsatisfy rules
     function satisfyRule(rule) {
       rule.satisfied = true;
+      updateRuleBackground(rule);
     }
+    
     function unsatisfyRule(rule) {
       rule.satisfied = false;
+      updateRuleBackground(rule);
     }
+
+
+
+    //Function to update rule background colors
+    function updateRuleBackground(rule) {
+      const ruleItems = document.getElementsByClassName('rule-item');
+      for (let i = 0; i < ruleItems.length; i++) {
+        if (ruleItems[i].textContent === rule.text) {
+          ruleItems[i].style.backgroundColor = rule.satisfied ? '	#baffc9' : '#ffb3ba';
+          break;
+        }
+      }
+    }
+
+    
 
     //Function to check if all active rules are satisfied
     function checkRules() {
@@ -62,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
       for (let i = 0; i < activeRules.length; i++) {
         if(activeRules[i].satisfied==false){
           allRulesSatisfied = false;
+          break;
         }
       }
 
@@ -81,6 +103,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     }
+
+
+
 
     //function to activate rule functions
     function activateRule(ruleNumber){
@@ -130,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
   //Rule 2: PW must contain an uppercase letter
   function ruleTwo() {
     const input = document.getElementById('passwordInput');
-    input.addEventListener('input', checkRuleTwo());
+    input.addEventListener('input', checkRuleTwo);
   }
 
   function checkRuleTwo() {
@@ -140,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
       if (containsUppercase) {
         satisfyRule(activeRules[1]);
+        console.log("test");
         checkRules();
       } else {
         unsatisfyRule(activeRules[1]);
