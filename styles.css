@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+  background-color: #ffecd7;
   margin: 0;
   padding: 0;
 }
@@ -19,7 +19,7 @@ h1 {
 }
 
 .game {
-  background-color: #ffdfba;
+  background-color: #ffffff;
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -29,13 +29,12 @@ h1 {
 
 .rule-input {
   margin-bottom: 20px;
-  width: 100%;
   display: flex;
   align-items: center;
 }
 
 #passwordInput {
-  width: calc(100% - 100px);
+  flex: 1; 
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;

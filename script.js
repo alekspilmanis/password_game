@@ -16,6 +16,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
      let inactiveRules = [
       {
+        text:"Your password must include a valid roman numeral.",
+        satisfied:false
+      },
+      {
+        text:"Your password must include a month of the year.",
+        satisfied:false
+      },
+      {
+        text:"the digits in your password must add up to 25.",
+        satisfied:false
+      },
+      {
+        text:"your password must contain a special character.",
+        satisfied:false
+      },
+      {
         text:"your password must contain a number.",
         satisfied:false
       },
@@ -127,6 +143,22 @@ document.addEventListener('DOMContentLoaded', function() {
           ruleThree();
           checkRuleThree();
           break;
+        case 4:
+          ruleFour();
+          checkRuleFour();
+          break;
+        case 5:
+          ruleFive();
+          checkRuleFive();
+          break;
+        case 6:
+          ruleSix();
+          checkRuleSix();
+          break;
+        case 7:
+          ruleSeven();
+          checkRuleSeven();
+          break;
         default:
           console.log("Invalid number");
           break;
@@ -170,7 +202,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
       if (containsUppercase) {
         satisfyRule(activeRules[1]);
-        console.log("test");
         checkRules();
       } else {
         unsatisfyRule(activeRules[1]);
@@ -194,6 +225,97 @@ document.addEventListener('DOMContentLoaded', function() {
         checkRules();
       } else {
         unsatisfyRule(activeRules[2]);
+      }
+    }
+
+    //Rule 4: PW must contain a special char
+    function ruleFour() {
+      const input = document.getElementById('passwordInput');
+      
+      input.addEventListener('input', checkRuleFour);
+    }
+    
+    function checkRuleFour() {
+      const input = document.getElementById('passwordInput');
+      const inputValue = input.value.trim();
+      const containsSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(inputValue);
+      
+      if (containsSpecialChar) {
+        satisfyRule(activeRules[3]);
+        checkRules();
+      } else {
+        unsatisfyRule(activeRules[3]);
+      }
+    }
+
+    //Rule 5: Digits in PW must add up to 25
+    function ruleFive() {
+      const input = document.getElementById('passwordInput');
+      
+      input.addEventListener('input', checkRuleFive);
+    }
+    
+    function checkRuleFive() {
+      const input = document.getElementById('passwordInput');
+      const inputValue = input.value.trim();
+      let sum = 0;
+    
+      for (let i = 0; i < inputValue.length; i++) {
+        if (!isNaN(parseInt(inputValue[i]))) {
+          sum += parseInt(inputValue[i]);
+        }
+      }
+    
+      if (sum === 25) {
+        satisfyRule(activeRules[4]);
+        checkRules();
+      } else {
+        unsatisfyRule(activeRules[4]);
+      }
+    }
+
+    //Rule 6: PW must contain a month
+    function ruleSix() {
+      const input = document.getElementById('passwordInput');
+      
+      input.addEventListener('input', checkRuleSix);
+    }
+    
+    function checkRuleSix() {
+      const input = document.getElementById('passwordInput');
+      const inputValue = input.value.trim().toLowerCase();
+      const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+    
+      for (let i = 0; i < months.length; i++) {
+        if (inputValue.includes(months[i])) {
+          satisfyRule(activeRules[5]);
+          checkRules();
+          return;
+        }
+      }
+    
+      // If no month is found
+      unsatisfyRule(activeRules[5]);
+    }
+
+    //Rule 7: PW must contain a roman numeral -----------------------------------In progress
+    function ruleSeven() {
+      const input = document.getElementById('passwordInput');
+      
+      input.addEventListener('input', checkRuleSeven);
+    }
+    
+    function checkRuleSeven() {
+      const input = document.getElementById('passwordInput');
+      const inputValue = input.value.trim();
+    
+      // Regular expression to match capitalized Roman numerals
+      const romanNumeralRegex = "test";
+      if (romanNumeralRegex.test(inputValue)) {
+        satisfyRule(activeRules[6]);
+        checkRules();
+      } else {
+        unsatisfyRule(activeRules[6]);
       }
     }
 });
