@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
      let inactiveRules = [
       {
-        text:"Your password must include a valid roman numeral.",
+        text:"Your password must include a roman numeral.",
         satisfied:false
       },
       {
@@ -164,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
           break;
       }
     }
-
 //******************************************RULES************************************************//
 
 
@@ -293,12 +292,10 @@ document.addEventListener('DOMContentLoaded', function() {
           return;
         }
       }
-    
-      // If no month is found
       unsatisfyRule(activeRules[5]);
     }
 
-    //Rule 7: PW must contain a roman numeral -----------------------------------In progress
+    //Rule 7: PW must contain a roman numeral
     function ruleSeven() {
       const input = document.getElementById('passwordInput');
       
@@ -308,14 +305,15 @@ document.addEventListener('DOMContentLoaded', function() {
     function checkRuleSeven() {
       const input = document.getElementById('passwordInput');
       const inputValue = input.value.trim();
-    
-      // Regular expression to match capitalized Roman numerals
-      const romanNumeralRegex = "test";
-      if (romanNumeralRegex.test(inputValue)) {
-        satisfyRule(activeRules[6]);
-        checkRules();
-      } else {
-        unsatisfyRule(activeRules[6]);
+      const numerals = ['I', 'V', 'X', 'L', 'D', 'C', 'M'];
+
+      for(let i = 0; i < numerals.length; i++){
+        if (inputValue.includes(numerals[i])) {
+          satisfyRule(activeRules[6]);
+          checkRules();
+          return;
+        }
       }
+      unsatisfyRule(activeRules[6]);
     }
 });
